@@ -1,16 +1,41 @@
 #VRML_SIM R2025a utf8
+
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/samples/curriculum/protos/Obstacle.proto"
+
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5773 0.5773 0.5773 2.0944
-  position 0 0 10
+  orientation -0.26577045036129276 -0.03261229580363836 0.9634845644208171 3.376966241435352
+  position 1.8986130624539752 0.3646792324119711 1.1848147635260986
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
+  translation 0.18 0 0
+  floorSize 2 2
+  floorTileSize 0.4 0.4
+}
+E-puck {
+  hidden position_0_0 1035.5056918962084
+  hidden position_0_1 1959.337665404607
+  hidden linearVelocity_0 6.416174055083845e-05 0.00014906056165426461 -2.226709289788441e-08
+  hidden angularVelocity_0 -0.009937363456808377 0.004277446219428062 2.3118534115161833e-11
+  hidden rotation_1 0 0.9999999999999999 0 5.063301518756236
+  hidden linearVelocity_1 8.554885500860209e-05 0.00019874710795558513 -2.335500681471851e-11
+  hidden angularVelocity_1 -0.009937363450142254 0.004277446216514427 -7.152719532853478e-11
+  hidden rotation_2 0 -1 0 1.0161504354240574
+  hidden linearVelocity_2 8.554885471730929e-05 0.00019874710729102588 -2.1927526473005445e-11
+  hidden angularVelocity_2 -0.009937363450141177 0.0042774462163504565 1.177657928322444e-10
+  translation -0.43377940966197676 -0.5554084942016341 -6.396264184661479e-05
+  rotation 7.287306647925678e-05 4.79689946462674e-05 -0.9999999961942458 1.9772663022198436
+  controller "ControladorProyectoFinal"
+}
+Obstacle {
+  translation 0.13 0 0.025
 }
