@@ -83,8 +83,8 @@ for sensor in prox_sensors:
 # 0 = Libre, 1 = Obstáculo
 MAPA_GRID = [
     [ 0,  0,  1,  0,  0 ],
-    [ 0,  0,  1,  0,  0 ],
-    [ 0,  0,  0,  0,  1 ],
+    [ 0,  0,  0,  0,  0 ],
+    [ 0,  0,  1,  0,  1 ],
     [ 1,  1,  0,  0,  1 ],
     [ 0,  0,  0,  0,  0 ]
 ]
@@ -114,22 +114,21 @@ else:
     print(f"Ruta en metros (x, y): {ruta_planificada}")
 
 # --- VARIABLES DE ESTADO Y ODOMETRÍA ---
-# Aplicar la misma inversión para la posición de inicio
 x_k = CELDA_INICIO[1] * TAMANO_CELDA_MTS  
-y_k = (TOTAL_FILAS - 1 - CELDA_INICIO[0]) * TAMANO_CELDA_MTS  # <--- INVERSIÓN AQUÍ
+y_k = (TOTAL_FILAS - 1 - CELDA_INICIO[0]) * TAMANO_CELDA_MTS  
 phi_k = 0.0
 last_enc_l = 0.0
 last_enc_r = 0.0
 
 current_waypoint_index = 0
-DISTANCE_TOLERANCE = 0.05
+DISTANCE_TOLERANCE = 0.08  # Se subió a 0.08 para dar un margen de arribo realista
 
 # --- BUCLE PRINCIPAL ---
 while robot.step(TIME_STEP) != -1:
     if not ruta_planificada:
-        break # Detiene la ejecución si no hay ruta
+        break 
         
-    # 1. PERCEPCIÓN Y ODOMETRÍA
+    # 1. PERCEPCIÓN Y ODOMETRÍA (Basado en ecuaciones de guía)
     enc_l = left_encoder.getValue()
     enc_r = right_encoder.getValue()
     
@@ -152,20 +151,30 @@ while robot.step(TIME_STEP) != -1:
     # 2. DETECCIÓN REACTIVA DE OBSTÁCULOS
     obstaculo_detectado = False
     for sensor in prox_sensors:
-        if sensor.getValue() > 120.0:
+        # Ajustado a 400 para evitar falsos positivos con paredes laterales de la grilla
+        if sensor.getValue() > 400.0:
             obstaculo_detectado = True
             break
             
-    # 3. CONTROL DE NAVEGACIÓN
+    # 3. CONTROL DE NAVEGACIÓN (Prioridades Corregidas según Rúbrica)
     v_l = 0.0
     v_r = 0.0
     
-    if obstaculo_detectado:
+    # CORRECCIÓN 1: Validar si la meta fue alcanzada de forma absoluta primero
+    if current_waypoint_index >= len(ruta_planificada):
+        print("¡Meta final alcanzada con éxito!")
+        left_motor.setVelocity(0.0)
+        right_motor.setVelocity(0.0)
+        break # Rompe el ciclo y detiene por completo al robot
+        
+    # CORRECCIÓN 2: Si no ha llegado, actuar ante obstáculos imprevistos en ruta
+    elif obstaculo_detectado:
         v_l = -0.5 * MAX_SPEED
         v_r = 0.5 * MAX_SPEED
         print("¡Obstáculo imprevisto! Evitando de forma reactiva.")
         
-    elif current_waypoint_index < len(ruta_planificada):
+    # CORRECCIÓN 3: Navegación estándar hacia puntos intermedios
+    else:
         target_x, target_y = ruta_planificada[current_waypoint_index]
         
         dx = target_x - x_k
@@ -188,16 +197,12 @@ while robot.step(TIME_STEP) != -1:
             omega = K_w * error_angulo
             velocidad = K_v * distancia_objetivo if abs(error_angulo) < 0.5 else 0.0
             
-            v_r = (2 * velocidad + omega * TRACK_WIDTH) / (2 * WHEEL_RADIUS)
+            # Fórmulas cinemáticas estandarizadas de asignación diferencial
             v_l = (2 * velocidad - omega * TRACK_WIDTH) / (2 * WHEEL_RADIUS)
+            v_r = (2 * velocidad + omega * TRACK_WIDTH) / (2 * WHEEL_RADIUS)
             
             v_r = max(min(v_r, MAX_SPEED), -MAX_SPEED)
             v_l = max(min(v_l, MAX_SPEED), -MAX_SPEED)
             
-    else:
-        print("¡Meta final alcanzada!")
-        v_l = 0.0
-        v_r = 0.0
-
     left_motor.setVelocity(v_l)
     right_motor.setVelocity(v_r)

@@ -9,8 +9,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.6232561051460167 0.00024838224422682454 0.782017752806468 3.1409738854869738
-  position 0.7753123515064131 0.1168255106453594 2.2846072467982985
+  orientation -0.6193254055167241 0.006440313283150512 0.7851079954034095 3.1252690368040836
+  position 0.6465579721499848 0.10603300522285845 1.6159908294888337
 }
 TexturedBackground {
 }
@@ -21,20 +21,26 @@ RectangleArena {
   floorTileSize 0.2 0.2
 }
 OilBarrel {
-  translation 0.38 -0.2 0
+  translation -0.22 0.01 0
   name "oil barrel(1)"
   height 0.2
   radius 0.05
 }
 OilBarrel {
-  translation -0.22 0 0
+  translation 0.18 0 0
   name "oil barrel(2)"
   height 0.2
   radius 0.05
 }
 OilBarrel {
-  translation -0.02 0 0
+  translation 0.37 -0.2 0
   name "oil barrel(3)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation 0.37 -0.4 0
+  name "oil barrel(6)"
   height 0.2
   radius 0.05
 }
@@ -50,13 +56,8 @@ OilBarrel {
   height 0.2
   radius 0.05
 }
-OilBarrel {
-  translation 0.38 -0.4 0
-  height 0.2
-  radius 0.05
-}
 E-puck {
   translation -0.22 -0.4 0
   rotation 0 0 1 1.5708
-  controller "test"
+  controller "ControladorProyectoFinal"
 }
