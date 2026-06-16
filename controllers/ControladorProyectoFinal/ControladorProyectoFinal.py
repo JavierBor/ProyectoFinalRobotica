@@ -49,7 +49,7 @@ R = 30.0
 
 # --- Constantes de Navegación ---
 VELOCIDAD_BASE = 3.0
-TIEMPO_MAXIMO = 10.0
+TIEMPO_MAXIMO = 30.0
 
 # Odometría 2D
 x_robot     = 0.0
