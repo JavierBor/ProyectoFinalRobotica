@@ -3,14 +3,14 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/obstacles/protos/OilBarrel.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/samples/curriculum/protos/Obstacle.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.42049529897413507 -0.02614646198793593 0.9069178937843085 3.254264637284855
-  position 1.4977945684033056 0.13730047137310614 1.692991787551098
+  orientation -0.6232561051460167 0.00024838224422682454 0.782017752806468 3.1409738854869738
+  position 0.7753123515064131 0.1168255106453594 2.2846072467982985
 }
 TexturedBackground {
 }
@@ -18,82 +18,45 @@ TexturedBackgroundLight {
 }
 RectangleArena {
   translation 0.18 0 0
-  floorSize 2 2
-  floorTileSize 0.4 0.4
+  floorTileSize 0.2 0.2
 }
-Obstacle {
-  translation 0.13 0.5 0.025
-  name "obstacle(13)"
+OilBarrel {
+  translation 0.38 -0.2 0
+  name "oil barrel(1)"
+  height 0.2
+  radius 0.05
 }
-Obstacle {
-  translation 0.33 0.5 0.025
-  name "obstacle(14)"
+OilBarrel {
+  translation -0.22 0 0
+  name "oil barrel(2)"
+  height 0.2
+  radius 0.05
 }
-Obstacle {
-  translation 0.27 0.51 0.025
-  name "obstacle(15)"
+OilBarrel {
+  translation -0.02 0 0
+  name "oil barrel(3)"
+  height 0.2
+  radius 0.05
 }
-Obstacle {
-  translation 0.2 0.51 0.025
-  name "obstacle(16)"
+OilBarrel {
+  translation 0.38 0.4 0
+  name "oil barrel(4)"
+  height 0.2
+  radius 0.05
 }
-Obstacle {
-  translation 0.37 0.47 0.025
-  name "obstacle(12)"
+OilBarrel {
+  translation 0.18 0.4 0
+  name "oil barrel(5)"
+  height 0.2
+  radius 0.05
 }
-Obstacle {
-  translation 0.37 0.35 0.025
-  name "obstacle(10)"
+OilBarrel {
+  translation 0.38 -0.4 0
+  height 0.2
+  radius 0.05
 }
 E-puck {
-  hidden position_0_0 1064.916427849409
-  hidden position_0_1 1984.6045543548828
-  hidden rotation_1 0 -1 0 3.2250743711206544
-  hidden rotation_2 0 -1 0 0.882002713866533
-  translation 0.259157 0.11109 -0.000686802
-  rotation -0.00048660208597057434 7.313863767333145e-05 -0.9999998789345675 -2.84321750904696
-  controller "ControladorProyectoFinal"
-}
-Obstacle {
-  translation 0.22 0 0.025
-}
-Obstacle {
-  translation 0.13 0.08 0.025
-  name "obstacle(2)"
-}
-Obstacle {
-  translation 0.13 0.17 0.025
-  name "obstacle(3)"
-}
-Obstacle {
-  translation 0.3 0 0.025
-  name "obstacle(4)"
-}
-Obstacle {
-  translation 0.37 0 0.025
-  name "obstacle(5)"
-}
-Obstacle {
-  translation 0.37 0.07 0.025
-  name "obstacle(6)"
-}
-Obstacle {
-  translation 0.37 0.14 0.025
-  name "obstacle(7)"
-}
-Obstacle {
-  translation 0.37 0.41 0.025
-  name "obstacle(11)"
-}
-Obstacle {
-  translation 0.37 0.21 0.025
-  name "obstacle(8)"
-}
-Obstacle {
-  translation 0.37 0.28 0.025
-  name "obstacle(9)"
-}
-Obstacle {
-  translation 0.13 0 0.025
-  name "obstacle(1)"
+  translation -0.22 -0.4 0
+  rotation 0 0 1 1.5708
+  controller "test"
 }
