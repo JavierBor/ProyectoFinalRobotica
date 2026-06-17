@@ -1,0 +1,99 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/obstacles/protos/OilBarrel.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.7433349351610409 -0.029452933554058168 0.6682706778500695 3.194541457014545
+  position -0.05938660433918422 -0.020976547231036417 2.473342628107252
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0.18 0 0
+  floorTileSize 0.2 0.2
+}
+OilBarrel {
+  translation -0.02 -0.4 0
+  name "oil barrel(1)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation -0.02 -0.2 0
+  name "oil barrel(7)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation -0.02 0 0
+  name "oil barrel(8)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation -0.02 0.4 0
+  name "oil barrel(9)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation -0.22 0.4 0
+  name "oil barrel(10)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation 0.38 0.2 0
+  name "oil barrel(2)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation 0.28 0 0
+  name "oil barrel(3)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation 0.37 -0.4 0
+  name "oil barrel(6)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation 0.58 -0.4 0
+  name "oil barrel(12)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation 0.18 -0.4 0
+  name "oil barrel(11)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation 0.38 0.4 0
+  name "oil barrel(4)"
+  height 0.2
+  radius 0.05
+}
+OilBarrel {
+  translation 0.18 0.4 0
+  name "oil barrel(5)"
+  height 0.2
+  radius 0.05
+}
+E-puck {
+  translation -0.219866 -0.402105 0.02509
+  rotation 0 0 1 1.5708
+  controller "ControladorProyectoFinal"
+}
