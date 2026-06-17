@@ -180,7 +180,6 @@ Inicio -> Inicializar robot, motores, encoders y sensores -> Definir grilla de o
 El primer escenario corresponde a un entorno con obstáculos distribuidos en la arena, representados mediante barriles. El robot debía desplazarse desde la posición inicial hasta una meta ubicada en un extremo del mapa, siguiendo una ruta calculada por A*.
 
 La ruta planificada fue:
-
 [
     [0.0, 0.8],
     [0.2, 0.8],
@@ -194,8 +193,24 @@ La ruta planificada fue:
 ]
 
 ### 9.2 Escenario complejo
+El segundo escenario corresponde también a un entorno con obstáculos distribuidos en la arena, representados mediante barriles. La idea fue poner más barriles para hacer el trayecto más complicado. Al igual que el otro escenario, el robot debía desplazarse desde la posición inicial hasta una meta ubicada en un extremo del mapa, siguiendo una ruta calculada por A*.
 
-Este falta
+La ruta planificada fue:
+[
+    [0.0, 0.8],
+    [0.2, 0.8],
+    [0.4, 0.8],
+    [0.6, 0.8],
+    [0.6, 0.6],
+    [0.6, 0.4],
+    [0.4, 0.4],
+    [0.2, 0.4],
+    [0.2, 0.2],
+    [0.2, 0.0],
+    [0.4, 0.0],
+    [0.6, 0.0],
+    [0.8, 0.0]
+]
 
 ## 10. Resultados obtenidos
 ### 10.1 Resultados cuantitativos del escenario simple
@@ -223,19 +238,13 @@ La meta estaba ubicada en:
 
 El error final fue aproximadamente 0.077 m, valor menor que la tolerancia configurada de 0.08 m. Por esta razón, la ejecución se considera exitosa.
 
-### 10.2 Comparación entre ruta planificada y trayectoria real
+### 10.2 Comparación entre ruta planificada y trayectoria real (escenario simple)
 En el gráfico de trayectoria se observa que la ruta planificada por A* tiene forma segmentada, con movimientos rectos y cambios de dirección de 90°. En cambio, la trayectoria real estimada por odometría es más curva y suave.
 Esto ocurre porque A* trabaja en una grilla discreta, mientras que el robot diferencial se mueve en un espacio continuo. El robot no puede seguir las esquinas como en la grilla, porque debe girar y corregir su orientación progresivamente.
 La trayectoria real fue más corta que la planificada. Esto se debe principalmente a que el robot recortó algunas esquinas durante el seguimiento de los waypoints. Aunque la trayectoria no coincidió exactamente con la ruta ideal, el robot logró acercarse correctamente a la meta.
 
-### 10.3 Análisis del error angular
-El gráfico de error angular muestra que el error se mantiene bajo o relativamente estable durante los tramos rectos, pero aumenta en los cambios de dirección.
-Los mayores picos de error angular aparecen cuando el robot cambia de un waypoint a otro y debe modificar su orientación. El error angular máximo fue de aproximadamente 1.368 rad, lo que indica que en algunos momentos el robot tuvo que realizar correcciones importantes.
-Aun así, el controlador logró reducir el error después de cada cambio de dirección y permitió que el robot continuara avanzando hacia la meta.
-
-## 11. Gráficos y evidencias
-### 11.1 Comparativa de trayectoria
-El gráfico de trayectoria muestra:
+## 10.3 Gráficos y evidencias
+El gráfico de trayectoria del escenario simple muestra:
 - Ruta planificada por A* en rojo.
 - Trayectoria real estimada por odometría en azul.
 - Punto de inicio en verde.
@@ -245,6 +254,67 @@ El gráfico de error muestra:
 - Evolución del reloj angular en naranjo
   
 <img width="1488" height="590" alt="resultados" src="https://github.com/user-attachments/assets/fbb8fc64-c021-4484-aea8-4aa51bcd2faf" />
+
+### 10.4 Análisis del error angular (escenario simple)
+El gráfico de error angular muestra que el error se mantiene bajo o relativamente estable durante los tramos rectos, pero aumenta en los cambios de dirección.
+Los mayores picos de error angular aparecen cuando el robot cambia de un waypoint a otro y debe modificar su orientación. El error angular máximo fue de aproximadamente 1.368 rad, lo que indica que en algunos momentos el robot tuvo que realizar correcciones importantes.
+Aun así, el controlador logró reducir el error después de cada cambio de dirección y permitió que el robot continuara avanzando hacia la meta.
+
+### 10.5 Resultados cuantitativos del escenario complicado
+A partir de la ejecución del robot en Webots en el escenario complicado, se obtuvieron las siguientes métricas:
+
+| Métrica                                                 | Resultado          |
+|---------------------------------------------------------|--------------------|
+| Tiempo total de navegación                              | 28,67 s            |
+| Longitud de la ruta planificada                         | 2,40 m             |
+| Longitud aproximada de la trayectoria ejecutada         | 2,27 m             |
+| Diferencia entre ruta planificada y trayectoria real    | 0,13 m             |
+| Error final de posición respecto a la meta              | 0,079 m            |
+| Error angular promedio absoluto                         | 0,433 rad          |
+| Error angular máximo absoluto                           | 1,369 rad          |
+| Puntos intermedios alcanzados                           | 13/13              |
+| Estado final                                            | Meta alcanzada     |
+
+La ruta planificada por A* estuvo compuesta por 13 puntos intermedios. El robot inició en la posición:
+- x = 0.0 m
+- y = 0.8 m
+
+La meta estaba ubicada en:
+- x = 0.8 m
+- y = 0.0 m
+
+La posición final estimada por odometría fue aproximadamente:
+- x = 0.730 m
+- y = 0.036 m
+
+El error final fue aproximadamente 0.079 m, valor menor que la tolerancia configurada de 0.08 m. Por esta razón, la ejecución se considera exitosa, ya que el robot logró llegar a la zona de la meta dentro del margen permitido.
+
+### 10.6 Comparación entre ruta planificada y trayectoria real (escenario complicado)
+En el gráfico de trayectoria se observa que la ruta planificada por A* tiene una forma más extensa y con más cambios de dirección que en el escenario simple. Esto se debe a que el escenario complicado posee una distribución de obstáculos que obliga al robot a seguir un camino más largo antes de llegar a la meta.
+La ruta planificada aparece en rojo, mientras que la trayectoria real estimada por odometría aparece en azul. En general, el robot siguió correctamente la forma global de la ruta, avanzando primero por la parte superior del mapa, luego descendiendo por la zona derecha, desplazándose hacia la izquierda en una zona intermedia y finalmente bajando para acercarse a la meta.
+La trayectoria real no coincide exactamente con la ruta planificada. Esto ocurre porque A* entrega una ruta discreta sobre una grilla, formada por tramos rectos y cambios de dirección marcados. En cambio, el robot diferencial se mueve en un espacio continuo, por lo que realiza curvas y ajustes progresivos durante el seguimiento de los waypoints.
+A pesar de estas diferencias, la trayectoria ejecutada se mantuvo cercana a la ruta planificada. La diferencia entre la longitud de la ruta ideal y la trayectoria real fue de aproximadamente 0,13 m, lo que indica que el robot siguió la ruta de manera bastante consistente en este escenario.
+
+## 10.7 Gráficos y evidencias
+El gráfico de trayectoria del escenario complicado muestra:
+- Ruta planificada por A* en rojo.
+- Trayectoria real estimada por odometría en azul.
+- Punto de inicio en verde.
+- Meta en negro.
+
+El gráfico de error del escenario complicado muestra:
+- Evolución del error angular en naranjo.
+- Mayores variaciones del error durante los cambios de dirección.
+- Correcciones de orientación realizadas por el robot mientras sigue los waypoints.
+ 
+<img width="1489" height="590" alt="resultados dificiles" src="https://github.com/user-attachments/assets/97f743c4-dbc4-4a5e-9b62-3807250de8f6" />
+
+
+### 10.8 Análisis del error angular (escenario complicado)
+El gráfico de error angular muestra que el robot tuvo que realizar varias correcciones durante el recorrido. Esto era esperable, ya que el escenario complicado incluye más puntos intermedios y más cambios de dirección que el escenario simple.
+Durante los primeros segundos, el error angular se mantuvo cercano a cero mientras el robot avanzaba en un tramo recto. Luego aparecen variaciones más notorias cuando el robot comienza a cambiar de dirección para seguir los nuevos waypoints.
+El error angular máximo fue de aproximadamente 1.369 rad, valor similar al obtenido en el escenario simple. Esto indica que, en algunos momentos, el robot tuvo que corregir fuertemente su orientación. Sin embargo, el controlador logró estabilizar el movimiento y continuar avanzando hacia la meta.
+El error angular promedio absoluto fue de aproximadamente 0.433 rad. Esto muestra que el robot mantuvo una desviación angular moderada durante el recorrido, pero sin perder la ruta ni dejar de alcanzar los puntos intermedios.
 
 ## 12. Limitaciones
 ### 12.1 Error acumulado de odometría
